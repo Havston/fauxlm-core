@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Запуск AirCode Core из командной строки.
+Запуск FauxLM Core из командной строки.
 
 Использование:
     python cli.py                    # запуск с настройками по умолчанию
@@ -17,13 +17,13 @@ from app.config import HOST, PORT
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="AirCode Core — открытый локальный мок-сервер для LLM API")
+    parser = argparse.ArgumentParser(description="FauxLM Core — открытый локальный мок-сервер для LLM API")
     parser.add_argument("--host", default=HOST, help=f"Хост (по умолчанию {HOST})")
     parser.add_argument("--port", type=int, default=PORT, help=f"Порт (по умолчанию {PORT})")
     parser.add_argument("--reload", action="store_true", help="Автоперезагрузка при изменении кода (для разработки)")
     args = parser.parse_args()
 
-    print(f"AirCode Core запускается на http://{args.host}:{args.port}")
+    print(f"FauxLM Core запускается на http://{args.host}:{args.port}")
     print(f"OpenAI-совместимый эндпоинт: http://localhost:{args.port}/v1/chat/completions")
     print(f"Anthropic-совместимый эндпоинт: http://localhost:{args.port}/v1/messages")
 

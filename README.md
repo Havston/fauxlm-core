@@ -1,4 +1,4 @@
-# AirCode Core
+# FauxLM Core
 
 Открытый (MIT) локальный синтетический мок-сервер для разработчиков
 ИИ-агентов и LLM-приложений. Эмулирует OpenAI- и Anthropic-совместимые
@@ -23,7 +23,7 @@ export OPENAI_BASE_URL="http://localhost:8080/v1"
 export ANTHROPIC_BASE_URL="http://localhost:8080/v1"
 ```
 
-Ключ API может быть любой непустой строкой — AirCode его не проверяет.
+Ключ API может быть любой непустой строкой — FauxLM его не проверяет.
 
 ⚠️ У Anthropic SDK другая конвенция `base_url`, чем у OpenAI: без `/v1`
 на конце (SDK сам его добавляет). У OpenAI SDK — с `/v1`. Подробности и
@@ -36,12 +36,12 @@ export ANTHROPIC_BASE_URL="http://localhost:8080/v1"
 - Подсчёт токенов (offline-friendly, с graceful fallback, если недоступен tiktoken)
 - Structured Outputs (генерация валидных данных по переданной JSON Schema)
 
-## AirCode Pro
+## FauxLM Pro
 
 Панель мониторинга в реальном времени, конструктор ИИ-катастроф
 (429 / 401 / 500 / 503 / timeout / обрыв стрима / повреждённые
 structured outputs, включая вероятностный режим срабатывания) и
-ROI-калькулятор сэкономленного бюджета — часть AirCode Pro.
+ROI-калькулятор сэкономленного бюджета — часть FauxLM Pro.
 
 ## Лицензия
 

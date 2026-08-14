@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "updated_at": "2026-07-01",
+    "source": "static-fallback",
+    "note": "Базовые тарифы на момент релиза MVP. Обновляются фоново при старте, если есть сеть."
+  },
+  "models": {
+    "gpt-4o": { "input_per_1m": 2.50, "output_per_1m": 10.00 },
+    "gpt-4o-mini": { "input_per_1m": 0.15, "output_per_1m": 0.60 },
+    "gpt-4.1": { "input_per_1m": 2.00, "output_per_1m": 8.00 },
+    "o1": { "input_per_1m": 15.00, "output_per_1m": 60.00 },
+    "claude-opus-4-8": { "input_per_1m": 15.00, "output_per_1m": 75.00 },
+    "claude-sonnet-5": { "input_per_1m": 3.00, "output_per_1m": 15.00 },
+    "claude-haiku-4-5-20251001": { "input_per_1m": 0.80, "output_per_1m": 4.00 },
+    "deepseek-chat": { "input_per_1m": 0.27, "output_per_1m": 1.10 },
+    "deepseek-reasoner": { "input_per_1m": 0.55, "output_per_1m": 2.19 }
+  },
+  "default_model_fallback": { "input_per_1m": 3.00, "output_per_1m": 15.00 }
+}
