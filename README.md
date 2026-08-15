@@ -7,6 +7,12 @@
 
 ## Быстрый старт
 
+**Готовый `.exe` (Windows, без установки Python):**
+[Скачать последнюю версию](https://github.com/Havston/fauxlm-core/releases/latest/download/FauxLM.exe)
+— просто запустить, панель будет на `http://localhost:8080`.
+
+**Или из исходников:**
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
