@@ -14,7 +14,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 COSTS_FILE = BASE_DIR / "costs.json"
 
-HOST = os.environ.get("FAUXLM_HOST", "0.0.0.0")
+HOST = os.environ.get("FAUXLM_HOST", "127.0.0.1")
 PORT = int(os.environ.get("FAUXLM_PORT", "8080"))
 
 # Максимум строк лога, которые держим в памяти (используется общим

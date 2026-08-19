@@ -47,13 +47,18 @@ async def chat_completions(payload: OpenAIChatRequest):
     latency = state.current_latency_ms() / 1000
     await asyncio.sleep(latency)
 
-    wants_json_schema = (
-        payload.response_format and payload.response_format.type == "json_schema"
-        and payload.response_format.json_schema
-    )
+    response_format_type = payload.response_format.type if payload.response_format else "text"
+    wants_json_schema = response_format_type == "json_schema" and payload.response_format.json_schema
+    wants_json_object = response_format_type == "json_object"
+
     if wants_json_schema:
         reply_text = json.dumps(
             generate_from_json_schema(payload.response_format.json_schema),
+            ensure_ascii=False,
+        )
+    elif wants_json_object:
+        reply_text = json.dumps(
+            {"response": generate_reply_text(messages, max_words=payload.max_tokens)},
             ensure_ascii=False,
         )
     else:
