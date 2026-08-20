@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
@@ -11,7 +12,22 @@ from app.routers import anthropic_routes, openai_routes
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(message)s")
 logger = logging.getLogger("fauxlm")
 
-app = FastAPI(title="FauxLM Core", description="Открытый локальный мок-сервер для LLM API")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    load_costs()
+    try:
+        await refresh_costs_from_remote()
+    except Exception:
+        pass
+    yield
+
+
+app = FastAPI(
+    title="FauxLM Core",
+    description="Открытый локальный мок-сервер для LLM API",
+    lifespan=lifespan,
+)
 
 app.include_router(openai_routes.router)
 app.include_router(anthropic_routes.router)
@@ -37,8 +53,7 @@ _ROOT_PAGE = """<!DOCTYPE html>
     <li><code>POST /v1/messages</code></li>
   </ul>
   <p>Панель мониторинга, конструктор ИИ-катастроф и ROI-калькулятор —
-  часть FauxLM Pro. Подробности: <a href="https://github.com/">страница проекта</a>.</p>
-  <!-- TODO: заменить ссылку выше на реальную страницу продукта/продаж, когда она будет готова -->
+  часть FauxLM Pro. Подробности: <a href="https://github.com/Havston/fauxlm-core">страница проекта</a>.</p>
 </body>
 </html>"""
 
@@ -46,12 +61,3 @@ _ROOT_PAGE = """<!DOCTYPE html>
 @app.get("/", response_class=HTMLResponse)
 async def root():
     return _ROOT_PAGE
-
-
-@app.on_event("startup")
-async def startup() -> None:
-    load_costs()
-    try:
-        await refresh_costs_from_remote()
-    except Exception:
-        pass
